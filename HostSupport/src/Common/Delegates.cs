@@ -261,6 +261,8 @@ namespace DND.EmbedUtils
 
             if (targetMethod.ReturnType == typeof(void))
                 il.Emit(OpCodes.Ldsfld, typeof(IntPtr).GetField("Zero"));
+            else if (!nativeTypes.Contains(targetMethod.ReturnType)) // wrap objects types
+                il.Emit(OpCodes.Call, typeof(GCHandle).GetMethod(nameof(GCHandle.Alloc), new Type[] {typeof(Type)}));
 
             il.Emit(OpCodes.Ret);
 
