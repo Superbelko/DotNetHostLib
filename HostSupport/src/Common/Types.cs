@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace DND.EmbedUtils
 {
@@ -39,7 +40,7 @@ namespace DND.EmbedUtils
             return IntPtr.Zero;
         }
 
-        public static IntPtr GetMethodWithParams(IntPtr type, string name, string[] paramTypes, int paramCount)
+        public static IntPtr GetMethodWithParams(IntPtr type, string name, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 3)] string[] paramTypes, int paramCount)
         {
             if (type != IntPtr.Zero && paramCount > 0)
             {
